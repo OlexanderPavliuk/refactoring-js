@@ -28,25 +28,27 @@
 </div>
 
 <script>
-    const slider = document.getElementById('slider');
-    const thumb = document.getElementById('thumb');
-    let isDragging = false;
+    (() => {
+        const slider = document.getElementById('slider');
+        const thumb = document.getElementById('thumb');
+        let isDragging = false;
 
-    thumb.addEventListener('mousedown', () => {
-        isDragging = true;
-    });
+        thumb.addEventListener('mousedown', () => {
+            isDragging = true;
+        });
 
-    document.addEventListener('mousemove', (event) => {
-        if (isDragging) {
-            let newLeft = event.clientX - slider.getBoundingClientRect().left - thumb.offsetWidth / 2;
-            newLeft = Math.max(0, Math.min(newLeft, slider.offsetWidth - thumb.offsetWidth));
-            thumb.style.left = `${newLeft}px`;
-        }
-    });
+        document.addEventListener('mousemove', (event) => {
+            if (isDragging) {
+                let newLeft = event.clientX - slider.getBoundingClientRect().left - thumb.offsetWidth / 2;
+                newLeft = Math.max(0, Math.min(newLeft, slider.offsetWidth - thumb.offsetWidth));
+                thumb.style.left = `${newLeft}px`;
+            }
+        });
 
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-    });
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+    })();
 </script>
 </body>
 </html>
