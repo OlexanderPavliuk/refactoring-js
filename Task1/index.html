@@ -28,32 +28,34 @@
 </div>
 
 <script>
-  const squares = document.querySelectorAll('.square');
+    const squares = document.querySelectorAll('.square');
+    const container = document.getElementById('container');
 
-  squares.forEach(square => {
-    square.addEventListener('mousedown', (e) => {
-      let offsetX = e.clientX - square.getBoundingClientRect().left;
-      let offsetY = e.clientY - square.getBoundingClientRect().top;
+    squares.forEach(square => {
+        square.addEventListener('mousedown', (e) => {
+            let offsetX = e.clientX - square.getBoundingClientRect().left;
+            let offsetY = e.clientY - square.getBoundingClientRect().top;
 
-      const mouseMoveHandler = (moveEvent) => {
-        const left = moveEvent.clientX - offsetX;
-        const top = moveEvent.clientY - offsetY;
+            const containerRect = container.getBoundingClientRect();
 
-        // Prevent square from moving outside the container
-        const containerRect = document.getElementById('container').getBoundingClientRect();
-        const maxLeft = containerRect.width - square.offsetWidth;
-        const maxTop = containerRect.height - square.offsetHeight;
+            const mouseMoveHandler = (moveEvent) => {
+                const left = moveEvent.clientX - offsetX;
+                const top = moveEvent.clientY - offsetY;
 
-        square.style.left = `${Math.min(Math.max(left, containerRect.left), maxLeft + containerRect.left)}px`;
-        square.style.top = `${Math.min(Math.max(top, containerRect.top), maxTop + containerRect.top)}px`;
-      };
+                // Prevent square from moving outside the container
+                const maxLeft = containerRect.width - square.offsetWidth;
+                const maxTop = containerRect.height - square.offsetHeight;
 
-      document.addEventListener('mousemove', mouseMoveHandler);
-      document.addEventListener('mouseup', () => {
-        document.removeEventListener('mousemove', mouseMoveHandler);
-      });
+                square.style.left = `${Math.min(Math.max(left, containerRect.left), maxLeft + containerRect.left)}px`;
+                square.style.top = `${Math.min(Math.max(top, containerRect.top), maxTop + containerRect.top)}px`;
+            };
+
+            document.addEventListener('mousemove', mouseMoveHandler);
+            document.addEventListener('mouseup', () => {
+                document.removeEventListener('mousemove', mouseMoveHandler);
+            });
+        });
     });
-  });
 </script>
 </body>
 </html>
