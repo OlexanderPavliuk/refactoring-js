@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colored Circles</title>
+    <style>
+        .circle {
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+        }
+        .active {
+            border: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+<h1>Color Circles</h1>
+<div id="circles"></div>
+
+<script>
+    const circlesContainer = document.getElementById('circles');
+    let activeCircleIndex = 0;
+    const circles = [];
+
+    // Generate 20 random circles
+    for (let i = 0; i < 20; i++) {
+        const circle = document.createElement('div');
+        const size = Math.random() * 20 + 10;
+        circle.classList.add('circle');
+        circle.style.width = `${size}px`;
+        circle.style.height = `${size}px`;
+        circle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        circle.style.left = `${Math.random() * 80}vw`;
+        circle.style.top = `${Math.random() * 80}vh`;
+
+        circlesContainer.appendChild(circle);
+        circles.push(circle);
+    }
+
+    circles[activeCircleIndex].classList.add('active');
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (event) => {
+
+        if (event.key === 'Shift' && event.key === 'Tab') {
+            event.preventDefault();
+            circles[activeCircleIndex].classList.remove('active');
+            activeCircleIndex = (activeCircleIndex - 1 + circles.length) % circles.length;
+            circles[activeCircleIndex].classList.add('active');
+        }
+
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            circles[activeCircleIndex].classList.remove('active');
+            activeCircleIndex = (activeCircleIndex + 1) % circles.length;
+            circles[activeCircleIndex].classList.add('active');
+        }
+
+
+
+        if (event.key === 'ArrowUp') {
+            circles[activeCircleIndex].style.top = `${parseInt(circles[activeCircleIndex].style.top) - 10}px`;
+        }
+
+        if (event.key === 'ArrowDown') {
+            circles[activeCircleIndex].style.top = `${parseInt(circles[activeCircleIndex].style.top) + 10}px`;
+        }
+
+        if (event.key === 'ArrowLeft') {
+            circles[activeCircleIndex].style.left = `${parseInt(circles[activeCircleIndex].style.left) - 10}px`;
+        }
+
+        if (event.key === 'ArrowRight') {
+            circles[activeCircleIndex].style.left = `${parseInt(circles[activeCircleIndex].style.left) + 10}px`;
+        }
+    });
+</script>
+</body>
+</html>

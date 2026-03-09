@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escaping Button</title>
+    <style>
+        #container {
+            width: 300px;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .escape-btn {
+            position: absolute;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+<h1>Escaping Button</h1>
+<div id="container">
+    <button class="escape-btn" id="escapeBtn">Click Me</button>
+</div>
+
+<script>
+    const button = document.getElementById('escapeBtn');
+    const container = document.getElementById('container');
+
+    button.addEventListener('mouseover', () => {
+        const containerRect = container.getBoundingClientRect();
+        const buttonRect = button.getBoundingClientRect();
+
+        const maxLeft = containerRect.width - buttonRect.width;
+        const maxTop = containerRect.height - buttonRect.height;
+
+        const randomLeft = Math.random() * maxLeft;
+        const randomTop = Math.random() * maxTop;
+
+        button.style.left = `${randomLeft}px`;
+        button.style.top = `${randomTop}px`;
+    });
+</script>
+</body>
+</html>

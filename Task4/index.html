@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectable List</title>
+    <style>
+        .item {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .selected {
+            background-color: #00f;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Selectable List</h1>
+<ul id="list">
+    <li class="item">Item 1</li>
+    <li class="item">Item 2</li>
+    <li class="item">Item 3</li>
+    <li class="item">Item 4</li>
+    <li class="item">Item 5</li>
+</ul>
+
+<script>
+    const items = document.querySelectorAll('.item');
+
+    items.forEach(item => {
+        item.addEventListener('click', (event) => {
+            if (event.ctrlKey || event.metaKey) {
+                item.classList.toggle('selected');
+            } else {
+                items.forEach(i => i.classList.remove('selected'));
+                item.classList.add('selected');
+            }
+        });
+    });
+</script>
+</body>
+</html>
