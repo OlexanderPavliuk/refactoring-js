@@ -44,11 +44,12 @@
     // Keyboard navigation
     document.addEventListener('keydown', (event) => {
 
-        if (event.key === 'Shift' && event.key === 'Tab') {
+        if (event.shiftKey && event.key === 'Tab') {
             event.preventDefault();
             circles[activeCircleIndex].classList.remove('active');
             activeCircleIndex = (activeCircleIndex - 1 + circles.length) % circles.length;
             circles[activeCircleIndex].classList.add('active');
+            return;
         }
 
         if (event.key === 'Tab') {
